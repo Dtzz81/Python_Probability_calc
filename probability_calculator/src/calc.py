@@ -16,45 +16,32 @@ class Hat:
 
 
     def draw (self, number_of_draw_balls):
-        if len(self.contents) == 0:
-            if len(self.ball_list) < number_of_draw_balls:
-                self.contents = self.ball_list
-                return self.contents
-
+        if len(self.ball_list) <= number_of_draw_balls:
+            self.contents = self.ball_list
+            return self.contents
 
         drawn_balls = random.sample(self.contents, number_of_draw_balls)
         self.contents = [ball for ball in self.contents if ball not in drawn_balls]
         return drawn_balls
 
-    def experiment(self, expected_balls, num_balls_drawn, num_experiments):
-        total_draws = 0
+def experiment(self, expected_balls, num_balls_drawn, num_experiments):
+    expected_balls_matching_result = 0
 
-        for i in range(num_experiments):
-            new_contents = self.contents.copy()
-            drawn_balls = new_contents.draw(num_balls_drawn)
-            counts = {}
-            for ball in drawn_balls:
-                counts[ball] = counts =+ 1
-                
+    for i in range(num_experiments):
+        new_contents = copy.deepcopy(self)
+        drawn_balls = new_contents.draw(num_balls_drawn)
+        counts = {}
+        for ball in drawn_balls:
+            counts[ball] = counts.get(ball, 0) + 1
 
-     """    count = 0
-        for i in range(num_experiments):
-            new_contents = self.contents.copy()
-            drawn_balls = self.draw_balls(new_contents, num_balls_drawn)
+        compare = all(expected_balls.get(color, 0) <= counts.get(color, 0)
+                        for color in expected_balls.keys())
 
-            if self.check_expected(drawn_balls, expected_balls):
-                count += 1
+        if compare:
+            expected_balls_matching_result += 1
 
-        return count / num_experiments """
-
-""" def probability(self, ball_colour):
-        balls_total = len(self.ball_list)
-        colours_total = self.ball_list.count(ball_colour)
-        if
-        return colours_total / balls_total """
-
-
-
+    probability = expected_balls_matching_result / num_experiments
+    return probability
 
 
 
