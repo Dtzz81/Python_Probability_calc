@@ -27,7 +27,7 @@ def test_probability_is_fifty_fifty():
 
 def test_draw_number_exceeds_original_number_of_balls():
     hat = Hat(blue=1, green=1)
-    number_of_draw_balls = 3
+    hat.draw(3)
     probability_green = hat.probability("green")
     actual = probability_green
     expected = 0.5

@@ -2,7 +2,7 @@
 name = "probability-calc"
 version = "0.1.0"
 description = ""
-authors = ["dtzz81 <denisa.turkova@madetech.com>"]
+authors = ["dtzz81 <denise.turkova@madetech.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
