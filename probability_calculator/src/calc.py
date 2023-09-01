@@ -31,7 +31,6 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     expected_balls_matching_result = 0
 
     for i in range(num_experiments):
-        new_hat = Hat()
         new_hat = copy.deepcopy(hat)
         drawn_balls = new_hat.draw(num_balls_drawn)
         counts = {}
@@ -47,3 +46,12 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     probability = expected_balls_matching_result / num_experiments
     return probability
 
+
+
+
+# inilise result, compute the result and return result
+#output   list = ("black", "red", "blue")
+#input   dictionary = {"black": 2, "red": 1, "blue": 1}
+
+
+        #colours = balls.colours

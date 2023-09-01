@@ -39,10 +39,11 @@ def test_draw_number_exceeds_original_number_of_balls():
 
 def test_probability_count():
     probability = experiment(Hat(blue=3, red=2, green=6), expected_balls={"blue": 2, "green": 1}, num_balls_drawn=4, num_experiments=1000)
-    actual = float(probability)
+    actual = probability
     print(actual)
     expected = 0.272
-    assert abs(actual - expected) < 0.01
+    print(actual - expected)
+    assert (actual - expected) < 0.01
 
 def test_hat_class_contents():
     hat = Hat(red=3, blue=2)
