@@ -1,7 +1,6 @@
 import copy
 import random
 
-
 class Hat:
     def __init__(self, **balls):
         self.ball_list = []
@@ -13,23 +12,28 @@ class Hat:
 
         self.contents = self.ball_list
 
-
-
-    def draw (self, number_of_draw_balls):
-        if len(self.ball_list) <= number_of_draw_balls:
-            self.contents = self.ball_list
-            return self.contents
-
-        drawn_balls = random.sample(self.contents, number_of_draw_balls)
-        self.contents = [ball for ball in self.contents if ball not in drawn_balls]
+    def draw(self, number_of_draw_balls):
+        if number_of_draw_balls >= len(self.contents):
+            drawn_balls = self.contents
+            self.contents = []
+        else:
+            drawn_balls = random.sample(self.contents, number_of_draw_balls)
+            for ball in drawn_balls:
+                self.contents.remove(ball)
         return drawn_balls
 
-def experiment(self, expected_balls, num_balls_drawn, num_experiments):
+    def probability (self, ball_colour):
+        balls_total = len(self.contents)
+        colours_total = self.contents.count(ball_colour)
+        return colours_total / balls_total
+
+def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     expected_balls_matching_result = 0
 
     for i in range(num_experiments):
-        new_contents = copy.deepcopy(self)
-        drawn_balls = new_contents.draw(num_balls_drawn)
+        new_hat = Hat()
+        new_hat = copy.deepcopy(hat)
+        drawn_balls = new_hat.draw(num_balls_drawn)
         counts = {}
         for ball in drawn_balls:
             counts[ball] = counts.get(ball, 0) + 1
@@ -42,14 +46,4 @@ def experiment(self, expected_balls, num_balls_drawn, num_experiments):
 
     probability = expected_balls_matching_result / num_experiments
     return probability
-
-
-
-
-# inilise result, compute the result and return result
-#output   list = ("black", "red", "blue")
-#input   dictionary = {"black": 2, "red": 1, "blue": 1}
-
-
-        #colours = balls.colours
 

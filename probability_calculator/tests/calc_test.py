@@ -1,3 +1,4 @@
+from src.calc import experiment
 from src.calc import Hat
 
 def test_hat_has_one_ball():
@@ -28,19 +29,20 @@ def test_probability_is_fifty_fifty():
 def test_draw_number_exceeds_original_number_of_balls():
     hat = Hat(blue=1, green=1)
     hat.draw(3)
-    probability_green = hat.probability("green")
-    actual = probability_green
-    expected = 0.5
-    assert actual == expected
-
+    if "green" in hat.contents:
+        probability_green = hat.probability("green")
+        actual = probability_green
+        expected = 0.5
+        assert actual == expected
+    else:
+        assert len(hat.contents) == 0
 
 def test_probability_count():
-    hat = Hat(blue=3, red=2, green=6)
-    probability = hat.experiment(expected_balls={"blue": 2, "green": 1}, num_balls_drawn=4, num_experiments=1000)
-    actual = probability
+    probability = experiment(Hat(blue=3, red=2, green=6), expected_balls={"blue": 2, "green": 1}, num_balls_drawn=4, num_experiments=1000)
+    actual = float(probability)
+    print(actual)
     expected = 0.272
     assert abs(actual - expected) < 0.01
-
 
 def test_hat_class_contents():
     hat = Hat(red=3, blue=2)
